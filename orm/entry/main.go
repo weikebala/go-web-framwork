@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"mygin/orm"
 )
@@ -19,7 +20,25 @@ func insertMuti(){
 	}
 }
 
+var user orm.User
+
+func first() []byte {
+	orm.DB.First(&user)
+	json,_ := json.Marshal(user)
+	return json
+}
+
+func findAll(){
+	user_sli := make([]orm.User, 1)
+	orm.DB.Find(&user_sli)
+	json,_ := json.Marshal(user_sli)
+	fmt.Println(string(json))
+}
+
 func main() {
+
 	//insertOne("a", 17)
-	insertMuti()
+	//insertMuti()
+	//first()
+	findAll()
 }
